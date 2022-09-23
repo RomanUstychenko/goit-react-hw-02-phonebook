@@ -1,4 +1,4 @@
-import Contacts from "./Contacts/Contacts"
+import Contacts from "./Contacts"
 
 
 export const App = () => {
