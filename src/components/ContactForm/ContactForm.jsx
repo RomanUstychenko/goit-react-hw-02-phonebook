@@ -4,7 +4,6 @@ import { nanoid } from "nanoid";
 
 export default class ContactForm extends Component  {
     state = {
-        contacts: [],
         name: '',
         number: '',
       }
@@ -22,11 +21,12 @@ export default class ContactForm extends Component  {
       handleSubmit = (e) => {
         e.preventDefault()
         const {name, number} = this.state;
+        this.props.onSubmit({name, number})
         this.setState ({
           name: '',
           number: '',
         })
-console.log(name, number)
+// console.log(name, number)
       }
 
       render () {
@@ -41,7 +41,7 @@ console.log(name, number)
                   <label htmlFor={telID}>Number</label>
                   <input id={telID} type="number" name="number" value={this.state.number} onChange={handleChange} />
                 </div>
-                <button>Add</button>
+                <button type="submit">Add</button>
                 </form>
                 )
            
