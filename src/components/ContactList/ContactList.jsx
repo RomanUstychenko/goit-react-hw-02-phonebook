@@ -1,14 +1,14 @@
 
 
  const ContactList = ({items}) => {
-        const elements = items.map(({name, number}) => {
-    return (
-            <li>Name: {name} Tel: {number}</li>
-    )
-} )
+//         const elements = items.map(({name, number, id}) => {
+//     return (
+//             <li key={id}>Name: {name} Tel: {number}</li>
+//     )
+// } )
     return (
         <ul>
-            {elements}
+            {/* {elements} */}
         </ul>
     )
 }

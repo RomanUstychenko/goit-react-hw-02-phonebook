@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { Component } from "react";
 import  ContactForm  from "./ContactForm/ContactForm"
 import ContactList from "./ContactList/ContactList"
@@ -10,16 +11,43 @@ export default class Contacts extends Component  {
     filter: ''
   }
   addContacts = (data) => {
+    
     this.setState ((prev) => {
+      const newName = {
+        id: nanoid(),
+        ...data
+      }
       return {
-        contacts: [...prev.contacts, data]
+        contacts: [...prev.contacts, newName]
       }
     })
   }
+  handleChange = (e) => {
+    const {name, value} = e.target;
+    this.setState( 
+      {[name]: value,
+      }
+   )
+  }
+  getFilteredContact () {
+    const { contacts, filter } = this.state;
+    if (!filter) {
+      return contacts;
+    }
+        const normalizedFilter = filter.toLocaleLowerCase();
+        const filteredContact = contacts.filter(({name}) => {
+        const nornalizedName = name.toLocaleLowerCase();
+        const result = nornalizedName.includes(normalizedFilter);
+        return result;
+      })
+      return filteredContact;
+    }
+
 
       render () {
-        const { addContacts } = this;
-        const { contacts } = this.state;
+        const { addContacts,  handleChange} = this;
+        const { filter } = this.state;
+        const contacts = this.getFilteredContact;
         return (
             <div>
               <div>
@@ -28,6 +56,12 @@ export default class Contacts extends Component  {
               </div>
               <div>
               <h2>Contacts</h2>
+              <input 
+              type="text" 
+              name="filter" 
+              value={filter}
+              onChange={handleChange}
+              />
                 <ContactList items={contacts} />
               </div>
             </div>
