@@ -1,7 +1,8 @@
 import { nanoid } from "nanoid";
 import { Component } from "react";
 import  ContactForm  from "./ContactForm/ContactForm"
-import ContactList from "./ContactList/ContactList"
+import {ContactList} from "./ContactList/ContactList"
+import css from "./Contacts.module.css"
 // import { nanoid } from "nanoid";
 
 
@@ -10,8 +11,11 @@ export default class Contacts extends Component  {
     contacts: [],
     filter: ''
   }
+
+  findID = nanoid();
   addContacts = (data) => {
-    
+    if (this.duplicateContacts(data))
+    return alert (`${data.name} is already in contact`)
     this.setState ((prev) => {
       const newName = {
         id: nanoid(),
@@ -22,11 +26,24 @@ export default class Contacts extends Component  {
       }
     })
   }
+  delContacts = (id) => {
+    this.setState ((prev) => {
+      const newGroup = prev.contacts.filter((item) => item.id !== id);
+      return {
+        contacts: newGroup
+      };
+    })
+  }
+    duplicateContacts = ({name}) => {
+      const { contacts } = this.state;
+      const result = contacts.find((contact) => contact.name === name);
+      return result;
+  }
+
   handleChange = (e) => {
     const {name, value} = e.target;
     this.setState( 
-      {[name]: value,
-      }
+      {[name]: value}
    )
   }
   getFilteredContact () {
@@ -42,27 +59,36 @@ export default class Contacts extends Component  {
       })
       return filteredContact;
     }
-
-
       render () {
-        const { addContacts,  handleChange} = this;
+        const {findID, addContacts,  delContacts, handleChange} = this;
         const { filter } = this.state;
-        const contacts = this.getFilteredContact;
+        const contacts = this.getFilteredContact();
         return (
-            <div>
-              <div>
-              <h2>PhoneBook</h2>
+            <div  className={css.phoneBook}>
+              <div className={css.contactForm}>
+              <h2 className={css.titlePhoneBook}>PhoneBook</h2>
                 <ContactForm onSubmit={addContacts} />
               </div>
-              <div>
+              <div className={css.contacts}>
               <h2>Contacts</h2>
+              <div className={css.contactFilter}>
+              <label
+              className={css.contactFilterLabel}
+              htmlFor={findID}
+              >Find contacts by name</label>
               <input 
+              className={css.contactFilterInput}
+              id={findID}
               type="text" 
               name="filter" 
               value={filter}
               onChange={handleChange}
               />
-                <ContactList items={contacts} />
+              </div>
+                <ContactList 
+                items={contacts}
+                delContacts={delContacts} 
+                />
               </div>
             </div>
             )
