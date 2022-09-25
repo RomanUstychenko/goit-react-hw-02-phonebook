@@ -12,7 +12,6 @@ import css from "./ContactList.module.css"
 } )
     return (
         <ul>
-            
             {elements}
         </ul>
     )

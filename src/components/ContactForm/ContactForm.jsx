@@ -65,6 +65,5 @@ export default class ContactForm extends Component  {
                 type="submit">Add</button>
                 </form>
                 )
-           
       }
     }

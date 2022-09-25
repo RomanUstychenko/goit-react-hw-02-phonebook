@@ -3,7 +3,6 @@ import { Component } from "react";
 import  ContactForm  from "./ContactForm/ContactForm"
 import {ContactList} from "./ContactList/ContactList"
 import css from "./Contacts.module.css"
-// import { nanoid } from "nanoid";
 
 
 export default class Contacts extends Component  {
