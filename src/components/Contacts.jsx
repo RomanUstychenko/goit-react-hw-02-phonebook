@@ -35,7 +35,7 @@ export default class Contacts extends Component  {
   }
     duplicateContacts = ({name}) => {
       const { contacts } = this.state;
-      const result = contacts.find((contact) => contact.name === name);
+      const result = contacts.find((contact) => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase());
       return result;
   }
 
