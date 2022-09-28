@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { Component } from "react";
 import  ContactForm  from "./ContactForm/ContactForm"
 import {ContactList} from "./ContactList/ContactList"
+import Filters from "./Filters/Filters"
 import css from "./Contacts.module.css"
 
 
@@ -66,24 +67,16 @@ export default class Contacts extends Component  {
             <div  className={css.phoneBook}>
               <div className={css.contactForm}>
               <h2 className={css.titlePhoneBook}>PhoneBook</h2>
-                <ContactForm onSubmit={addContacts} />
+                <ContactForm 
+                onSubmit={addContacts} />
               </div>
               <div className={css.contacts}>
               <h2>Contacts</h2>
-              <div className={css.contactFilter}>
-              <label
-              className={css.contactFilterLabel}
-              htmlFor={findID}
-              >Find contacts by name</label>
-              <input 
-              className={css.contactFilterInput}
-              id={findID}
-              type="text" 
-              name="filter" 
-              value={filter}
-              onChange={handleChange}
-              />
-              </div>
+                <Filters 
+                findID={findID}
+                filter={filter}
+                handleChange={handleChange}
+                />
                 <ContactList 
                 items={contacts}
                 delContacts={delContacts} 

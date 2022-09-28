@@ -8,20 +8,9 @@
     text-align: center;
 }
 .contactForm {
-    /* display: block; */
     border: 4px;
-}
-.contactFilter {
-    display: flex;
-    flex-direction: column;
-}
-.contactFilterLabel {
-    font-size: 25px;
 }
 .contacts {
     margin-left: 100px;
     min-width: 500px;
-}
-.contactFilterInput {
-    width: 300px;
 }
